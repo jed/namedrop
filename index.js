@@ -1,12 +1,11 @@
 if (typeof phantom === "undefined") {
-  spawn = require("child_process").spawn
-
-  n = function(a,b,c,d) {
-    for(b in a) {
-      for(c=a=0;d=b.charCodeAt(c++);a%=934)a+=c*d;
-      n[(a+360).toString(36)]=b
-    }
-  }
+  var spawn = require("child_process").spawn
+    , namespace = function(a,b,c,d) {
+        for(b in a) {
+          for(c=a=0;d=b.charCodeAt(c++);a%=934)a+=c*d;
+          namespace[(a+360).toString(36)]=b
+        }
+      }
 
   module.exports = function(code, objs, cb) {
     var args = [__filename].concat(objs)
@@ -25,12 +24,12 @@ if (typeof phantom === "undefined") {
     phantom.stderr.on('data', function(chunk){ cb(chunk); phantom.kill() })
 
     phantom.on("exit", function(){
-      JSON.parse(data).forEach(n)
+      JSON.parse(data).forEach(namespace)
 
-      for (var key in n) code = code
-        .replace(RegExp("\\." + n[key] + "\\b", "g"), "[n." + key + "]")
-        .replace(RegExp("'"   + n[key] + "'"  , "g"), "n."  + key      )
-        .replace(RegExp('"'   + n[key] + '"'  , "g"), "n."  + key      )
+      for (var key in namespace) code = code
+        .replace(RegExp("\\." + namespace[key] + "\\b", "g"), "[n." + key + "]")
+        .replace(RegExp("'"   + namespace[key] + "'"  , "g"), "n."  + key      )
+        .replace(RegExp('"'   + namespace[key] + '"'  , "g"), "n."  + key      )
 
       code = "n=function(a,b,c,d){for(b in a){for(c=a=0;d=b.charCodeAt(c++);a%=934)a+=c*d;n[(a+360).toString(36)]=b}};" + code
 
