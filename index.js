@@ -13,6 +13,8 @@ if (typeof phantom === "undefined") {
       , phantom = spawn("phantomjs", args, {cwd: __dirname})
       , data = ""
 
+    code = code.toString()
+
     objs
       .slice(0).reverse()
       .forEach(function(scope) {
