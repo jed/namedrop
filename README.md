@@ -39,7 +39,7 @@ This is most effective when used with something like [@aivopaas](http://twitter.
 Example
 -------
 
-(Note that that this is a contrived example that actually increates code size. Since Namedrop adds more than 100 bytes of overhead, it works best on DOM-heavy code of several hundred bytes or more.)
+(Note that that this is a contrived example that actually increases code size. Since Namedrop adds at least 111 bytes of overhead for namespacing, it works best on DOM-heavy code of several hundred bytes or more.)
 
 ### before.js
 
