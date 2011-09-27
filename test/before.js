@@ -1,0 +1,1 @@
+this.document.body.appendChild(this.document.createElement('script'))
