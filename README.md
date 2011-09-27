@@ -8,10 +8,10 @@ Namedrop is a JavaScript minifier for DOM-heavy code. It works by taking multipl
 * [node.js](http://nodejs.org/)
 * [phantom.js](http://www.phantomjs.org/)
 
-<!-- ## Install
+## Install
 
     $ npm install namedrop
- -->
+
 ## API
 
 ### `namedrop(code, DOM-refs, callback)`
