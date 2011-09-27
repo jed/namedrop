@@ -1,1 +1,1 @@
-this.document.body.appendChild(this.document.createElement('script'))
+with(n){this.document.body.appendChild(this.document.createElement('script'))}
