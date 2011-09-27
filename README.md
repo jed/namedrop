@@ -19,7 +19,7 @@ Namedrop is a JavaScript minifier for DOM-heavy code. It works by taking multipl
 Namedrop takes the code to be minified and an array of DOM references to resolve, and calls back with the minified code. This minified code starts with a `with` statement on a function `n`, which accepts a DOM object and hashes the object's properties on itself. the end result looks like this:
 
 ```javascript
-with(n=function(){/* 102-byte namespace function*/}){n(this);ORIGINAL_CODE}
+n=function(){/* 101-byte namespace function*/};n(this);n(this.document);...;ORIGINAL_CODE}
 ```
 
 so that you can have code like this:
@@ -31,20 +31,20 @@ this.document.body.appendChild(this.document.createElement('script'))
 and turn it into code like this:
 
 ```javascript
-with(n){this[fk][eq][cr](this[fk][e5]('script'))}
+this[n.fk][n.eq][n.cr](this[n.fk][n.e5]('script'))}
 ```
 
-This is most effective when used with something like [@aivopaas](http://twitter.com/aivopaas)'s [jscrush](http://www.iteral.com/jscrush/).
+This is most effective when used before something like [@aivopaas](http://twitter.com/aivopaas)'s [jscrush](http://www.iteral.com/jscrush/).
 
 Example
 -------
 
-(Note that that this is a contrived example that actually increases code size. Since Namedrop adds at least 111 bytes of overhead for namespacing, it works best on DOM-heavy code of several hundred bytes or more.)
+(Note that that this is a contrived example that actually increases code size. Since Namedrop adds at least 104 bytes of overhead for namespacing, it works best on DOM-heavy code of several hundred bytes or more.)
 
 ### before.js
 
 ```javascript
-with(n){this.document.body.appendChild(this.document.createElement('script'))}
+this.document.body.appendChild(this.document.createElement('script'))
 ```
 
 ### test.js

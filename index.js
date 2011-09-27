@@ -26,8 +26,9 @@ if (typeof phantom === "undefined") {
       JSON.parse(data).forEach(n)
 
       for (var key in n) code = code
-        .replace(RegExp("\\." + n[key] + "\\b", "g"), "[" + key + "]")
-        .replace(RegExp("'"   + n[key] + "'"  , "g"), "'" + key + "'")
+        .replace(RegExp("\\." + n[key] + "\\b", "g"), "[n." + key + "]")
+        .replace(RegExp("'"   + n[key] + "'"  , "g"), "n."  + key      )
+        .replace(RegExp('"'   + n[key] + '"'  , "g"), "n."  + key      )
 
       code = "n=function(a,b,c,d){for(b in a){for(c=a=0;d=b.charCodeAt(c++);a%=934)a+=c*d;n[(a+360).toString(36)]=b}};" + code
 
