@@ -2,7 +2,6 @@ fs = require("fs")
 namedrop = require("namedrop")
 
 before = fs.readFileSync("./before.js", "utf8")
-namedrop = require("namedrop")
 
 refs = [
   "this",

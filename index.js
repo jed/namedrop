@@ -29,7 +29,7 @@ if (typeof phantom === "undefined") {
         .replace(RegExp("\\." + n[key] + "\\b", "g"), "[" + key + "]")
         .replace(RegExp("'"   + n[key] + "'"  , "g"), "'" + key + "'")
 
-      code = "with(n=function(a,b,c,d){for(b in a){for(c=a=0;d=b.charCodeAt(c++);a%=934)a+=c*d;n[(a+360).toString(36)]=b}}){" + code +"}"
+      code = "n=function(a,b,c,d){for(b in a){for(c=a=0;d=b.charCodeAt(c++);a%=934)a+=c*d;n[(a+360).toString(36)]=b}};" + code
 
       cb(null, code)
     })
