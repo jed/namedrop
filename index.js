@@ -1,6 +1,7 @@
 if (typeof phantom === "undefined") {
   var spawn = require("child_process").spawn
-    , namespace = function(a,b,c,d) {
+    , namespace = {}
+    , n = function(a,b,c,d) {
         for(b in a) {
           for(c=a=0;d=b.charCodeAt(c++);a%=934)a+=c*d;
           namespace[(a+360).toString(36)]=b
@@ -24,7 +25,7 @@ if (typeof phantom === "undefined") {
     phantom.stderr.on('data', function(chunk){ cb(chunk); phantom.kill() })
 
     phantom.on("exit", function(){
-      JSON.parse(data).forEach(namespace)
+      JSON.parse(data).forEach(n)
 
       for (var key in namespace) code = code
         .replace(RegExp("\\." + namespace[key] + "\\b", "g"), "[n." + key + "]")
@@ -33,7 +34,7 @@ if (typeof phantom === "undefined") {
 
       code = "n=function(a,b,c,d){for(b in a){for(c=a=0;d=b.charCodeAt(c++);a%=934)a+=c*d;n[(a+360).toString(36)]=b}};" + code
 
-      cb(null, code)
+      cb(null, code, namespace)
     })
   }
 }
